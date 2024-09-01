@@ -1,0 +1,112 @@
+{
+    "combos": [
+      {
+        "name": "custom1",
+        "mappings": [
+          {
+            "type": "directory",
+            "scanners": ["kics"]
+          },
+          {
+            "type": "github",
+            "scanners": ["trufflehog"]
+          },
+          {
+            "type": "web",
+            "scanners": ["dastardly"]
+          },
+          {
+            "type": "openapi",
+            "scanners": ["zap"]
+          },
+          {
+            "type": "graphql",
+            "scanners": ["zap"]
+          },
+          {
+            "type": "soap",
+            "scanners": ["zap"]
+          },
+          {
+            "type": "docker",
+            "scanners": ["trivy"]
+          }
+        ]
+      },
+      {
+        "name": "default",
+        "mappings": [
+          {
+            "type": "directory",
+            "scanners": ["semgrep","kics","syft_grype","trufflehog"]
+          },
+          {
+            "type": "github",
+            "scanners": ["trufflehog"]
+          },
+          {
+            "type": "web",
+            "scanners": ["dastardly"]
+          },
+          {
+            "type": "openapi",
+            "scanners": ["zap"]
+          },
+          {
+            "type": "graphql",
+            "scanners": ["zap"]
+          },
+          {
+            "type": "soap",
+            "scanners": ["zap"]
+          },
+          {
+            "type": "docker",
+            "scanners": ["trivy"]
+          }
+        ]
+      },
+      {
+        "name": "CICD",
+        "mappings": [
+          {
+            "type": "directory",
+            "scanners": ["semgrep","kics","syft_grype","trufflehog"]
+          }
+        ]
+      },
+      {
+        "name": "full",
+        "mappings": [
+          {
+            "type": "directory",
+            "scanners": ["semgrep","kics","syft_cdxgen","syft_grype","trufflehog"]
+          },
+          {
+            "type": "github",
+            "scanners": ["trufflehog"]
+          },
+          {
+            "type": "web",
+            "scanners": ["dastardly","zap"]
+          },
+          {
+            "type": "openapi",
+            "scanners": ["zap"]
+          },
+          {
+            "type": "graphql",
+            "scanners": ["zap"]
+          },
+          {
+            "type": "soap",
+            "scanners": ["zap"]
+          },
+          {
+            "type": "docker",
+            "scanners": ["trivy","syft_cdxgen","syft_grype"]
+          }
+        ]
+      }
+    ]
+  }

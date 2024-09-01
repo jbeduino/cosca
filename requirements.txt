@@ -1,0 +1,5 @@
+docker
+colorlog
+validators
+pytest
+reportlab

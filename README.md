@@ -5,10 +5,12 @@
 
 # Cosca
 
-** Cosca (Combo Scanner) is an Application Security automation tool to scan multiple targets and process outputs in a one-liner command. **
+** Cosca (Combo Scanner) is an Application Security automation tool that invokes third-party scanners and process outputs in a one-liner command. **
+
+# Features
 
 
-# My Project
+# Why cosca?
 
 This is an example project.
 
@@ -16,6 +18,6 @@ This is an example project.
 
 ## Features
 
-- Feature 1
+- 
 - Feature 2
 - Feature 3
