@@ -39,14 +39,22 @@ class CustomScanner(Scanner):
         return output_files
 
     def get_findings_count(self, json_file):
-        severrity_index = {"Info": 0, "Low": 1, "Medium": 2, "High": 3}
-        findings_count = [0, 0, 0, 0, 0, 0]
+        findings_count=[0,0,0,0,0,0]
         with open(json_file, 'r', encoding='utf-8') as file:
             data = json.load(file)
         for r in data["runs"][0]["tool"]["driver"]["rules"]:
-            i = severrity_index[r["properties"]["impact"]
-                            [0].split("\n")[0].split(" ")[1]]
-            findings_count[i] = findings_count[i]+1
+            score=float(r["properties"]["security-severity"])
+            if 0.1 <= score <= 3.9:
+                i=1
+            elif 4.0 <= score <= 6.9:
+                i=2
+            elif 7.0 <= score <= 8.9:
+                i=3
+            elif 9.0 <= score <= 10.0:
+                i=4
+            else:
+                i=0
+            findings_count[i]=findings_count[i]+1
         return findings_count
 
     def get_aux_args(self):
