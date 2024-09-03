@@ -13,7 +13,7 @@
           },
           {
             "type": "web",
-            "scanners": ["dastardly"]
+            "scanners": ["zap"]
           },
           {
             "type": "openapi",

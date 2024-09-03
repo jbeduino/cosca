@@ -16,52 +16,17 @@ class CustomScanner(Scanner):
     REPORT_FILENAME = f"scan_results_{NAME}_{datetime.now().strftime('%y%m%d%H%M%S')}.json"
     CONTAINER_REPORT_DIRECTORY = "/tmp"
     CONTAINER_REPORT_PATH = f"{CONTAINER_REPORT_DIRECTORY}/{REPORT_FILENAME}"
-    # HOST_REPORT_DIRECTORY = f"{os.path.expanduser('~')}/.sympho/output_{NAME}"
-    # HOST_REPORT_PATH = f"{HOST_REPORT_DIRECTORY}/{REPORT_FILENAME}"
 
-    def __init__(self):
-        super().__init__(self.NAME, self.DOCKER_IMAGE)
-        self.report_path = ""
 
     def scan(self, target, working_dir, outputs):
         target_id=super().get_target_id(target)
         self.logger.info("Starting to scan target: %s (ID: %s)", target, target_id)
-        # generate txt output
-        # client = docker.from_env()
-        # container = client.containers.run(
-        #     self.DOCKER_IMAGE,
-        #     command=f"image --format table {target} ",
-        #     volumes={self.HOST_REPORT_DIRECTORY: {
-        #         'bind': self.CONTAINER_REPORT_DIRECTORY, 'mode': 'rw'}},
-        #     detach=True,
-        #     stdout=True,
-        #     stderr=True
-        # )
-        # container.wait()
-        # logs = container.logs()
-        # container.remove()
-        # print(logs.decode("utf-8"))
         command=f"image --format table {target} "
         volumes={working_dir: {
                 'bind': self.CONTAINER_REPORT_DIRECTORY, 'mode': 'rw'}}
         logs=self.run_container(self.DOCKER_IMAGE, command, volumes)
         for o in outputs:
             o.process_stdout(logs)
-        # generate json file output
-        # self.logger.info("Generating out file...")
-        # client = docker.from_env()
-        # container = client.containers.run(
-        #     self.DOCKER_IMAGE,
-        #     command=f"image --format json {target}",
-        #     volumes={self.HOST_REPORT_DIRECTORY: {
-        #         'bind': self.CONTAINER_REPORT_DIRECTORY, 'mode': 'rw'}},
-        #     detach=True,
-        #     stdout=True,
-        #     stderr=True
-        # )
-        # container.wait()
-        # logs = container.logs()
-        # container.remove()
         command=f"image --quiet --format json {target}"
         volumes={working_dir: {
                 'bind': self.CONTAINER_REPORT_DIRECTORY, 'mode': 'rw'}}

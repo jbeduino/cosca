@@ -28,7 +28,9 @@ class Cosca:
         self.parser.add_argument(
             "-c", "--combo", help="Name of the combo of scanners to execute. Combos are defined in combo.json", default="custom1")
         self.parser.add_argument("-t", "--target", nargs='+', help="Space separated targets to scan. Could be folders, urls, github repos, docker images",
-                                 default=["https://ginandjuice.shop"])
+                                default=["https://ginandjuice.shop"])
+                                #  default=["python:3.4-alpine"])
+                                # default=["https://ginandjuice.shop"])
                                 #  default=["/home/jose/vulnerables/ffufme-main"])
                                 #  default=["/home/jose/vulnerables/WebGoat-main"])
                                 #  default=["https://github.com/trufflesecurity/test_keys"])

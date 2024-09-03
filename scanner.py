@@ -45,7 +45,8 @@ class Scanner(ABC):
         """This method must be overriden in all subclasses and must return 
         a json string containing necessary variables to be used from output modules"""
 
-    def run_container(self, image, command, volumes={}, environment={}, user={}):
+    def run_container(self, image, command, volumes={}, environment={}, user=''):
+
         client = docker.from_env()
         container = client.containers.run(
             image,
