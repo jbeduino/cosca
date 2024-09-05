@@ -28,14 +28,15 @@ class Cosca:
         self.parser.add_argument(
             "-c", "--combo", help="Name of the combo of scanners to execute. Combos are defined in combo.json", default="custom1")
         self.parser.add_argument("-t", "--target", nargs='+', help="Space separated targets to scan. Could be folders, urls, github repos, docker images",
-                                default=["https://ginandjuice.shop"])
+                                default=["/home/jose/vulnerables/WebGoat-main"])
+                                # default=["https://ginandjuice.shop"])
                                 #  default=["python:3.4-alpine"])
                                 # default=["https://ginandjuice.shop"])
                                 #  default=["/home/jose/vulnerables/ffufme-main"])
                                 #  default=["/home/jose/vulnerables/WebGoat-main"])
                                 #  default=["https://github.com/trufflesecurity/test_keys"])
         self.parser.add_argument("-o", "--output", nargs='+',
-                                 help=f"Specify outputs. Separate more than one option with spaces. Options: {' '.join(self.get_filenames('output_handlers'))}", default=["pdf", "zip", "defectdojo"])
+                                 help=f"Specify outputs. Separate more than one option with spaces. Options: {' '.join(self.get_filenames('output_handlers'))}", default=["pdf", "zip"])
         log_group = self.parser.add_mutually_exclusive_group()
         log_group.add_argument('-q', '--quiet', action='store_true',
                                help='Run in quiet mode (only shows json minimal output)', default=False)
