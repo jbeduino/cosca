@@ -20,7 +20,7 @@ class CustomScanner(Scanner):
     CONTAINER_REPORT_DIRECTORY = "/tmp"
     CONTAINER_REPORT_FILE = f"{CONTAINER_REPORT_DIRECTORY}/{REPORT_FILE_NAME}"
 
-    def scan(self, target, working_dir, outputs):
+    def scan(self, target, working_dir, outputs, network):
         self.logger.info("Generating SBOM...")
         sbom_path_table = f"{working_dir}/{self.SBOM_FILE_NAME_TABLE}"
         command = f"-r {self.CONTAINER_TARGET_DIRECTORY} \

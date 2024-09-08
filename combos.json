@@ -54,7 +54,7 @@
           },
           {
             "type": "graphql",
-            "scanners": ["zap"]
+            "scanners": ["zap_graphql"]
           },
           {
             "type": "soap",

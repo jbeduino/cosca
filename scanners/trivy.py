@@ -18,7 +18,7 @@ class CustomScanner(Scanner):
     CONTAINER_REPORT_PATH = f"{CONTAINER_REPORT_DIRECTORY}/{REPORT_FILENAME}"
 
 
-    def scan(self, target, working_dir, outputs):
+    def scan(self, target, working_dir, outputs, network):
         target_id=super().get_target_id(target)
         self.logger.info("Starting to scan target: %s (ID: %s)", target, target_id)
         command=f"image --format table {target} "

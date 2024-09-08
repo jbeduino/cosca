@@ -28,7 +28,21 @@ class Cosca:
         self.parser.add_argument(
             "-c", "--combo", help="Name of the combo of scanners to execute. Combos are defined in combo.json", default="custom1")
         self.parser.add_argument("-t", "--target", nargs='+', help="Space separated targets to scan. Could be folders, urls, github repos, docker images",
-                                default=["/home/jose/vulnerables/WebGoat-main"])
+                                default=["https://www.dataaccess.com/webservicesserver/NumberConversion.wso"])
+                                # default=["https://pentest-ground.com:5013/graphql"])
+                                # default=["http://127.0.0.1/openapi.json"])
+                                # default=["python:3.4-alpine"])
+                                # default=["http://127.0.0.1/openapi.json"])
+                                # default=["https://petstore3.swagger.io/api/v3/openapi.json"])
+                                # default=["http://127.0.0.1/openapi.json"])
+        # docker run --network="host" -v $(pwd):/zap/wrk/:rw -t zaproxy/zap-stable zap-api-scan.py -t http://127.0.0.1/openapi.json -f openapi
+#         539  docker run -p 5000:5000 erev0s/vampi
+#   540  docker run -d -p 3000:3000 bkimminich/juice-shop
+#   541  docker run -d -e OPENAPI_BASE_PATH=/v3 -p 80:8080 openapitools/openapi-petstore
+                                      # default=["https://petstore.swagger.io/v2/swagger.json"])
+                                # /default=["http://127.0.0.1:5000/openapi.json"])
+                                # default=["https://petstore.swagger.io/v2/swagger.json"])
+                                # default=["/home/jose/vulnerables/WebGoat-main"])
                                 # default=["https://ginandjuice.shop"])
                                 #  default=["python:3.4-alpine"])
                                 # default=["https://ginandjuice.shop"])
@@ -44,6 +58,9 @@ class Cosca:
                                help='Run in verbose mode (debugging output)', default=True)
         log_group.add_argument('-f', '--force_pull', action='store_true',
                                help='Force docker to pull the scanner images from the registry before running the scanners. This ensures that the latest version of the scanners are being are being used. It may also avoid to use tampered images that may reside in the local docker daemon.', default=True)
+        log_group.add_argument('-n', '--network',
+                        help='Docker network to use with the scanner container. Useful to scan local targets.', default="")
+
         
         
         args = self.parser.parse_args()
@@ -68,7 +85,7 @@ class Cosca:
             "Combo %s not found in %s. Please verify combo name.", combo, file_path)
         sys.exit(1)
 
-    def trigger_scans(self, target, combo, working_dir, outputs):
+    def trigger_scans(self, target, combo, working_dir, outputs, network):
         mappings = self.get_combo_mappings(combo)
         reports = []
         self.logger.info("Combo: %s", combo)
@@ -93,8 +110,8 @@ class Cosca:
                             "Scanner module scanners.%s not found. Please implement a class inherited from Scanner in scanners/%s.py", scanner, scanner)
                         sys.exit(1)
                     cls = getattr(module, "CustomScanner")
-                    instance = cls(log_level=self.log_level)
-                    output_details = instance.scan(t, scanner_sub_dir, outputs)
+                    instance = cls(log_level=self.log_level, target_type=target_type)
+                    output_details = instance.scan(t, scanner_sub_dir, outputs, network)
                     aux_args = instance.get_aux_args()
                     reports.append({"output": output_details,
                                     "target": t,
@@ -128,7 +145,7 @@ class Cosca:
             outputs.append(instance)
         with tempfile.TemporaryDirectory(prefix="cosca_") as tmp_dir:
             json_summary = self.trigger_scans(
-                self.args.target, self.args.combo, tmp_dir, outputs)
+                self.args.target, self.args.combo, tmp_dir, outputs, network=self.args.network)
             if self.args.quiet:
                 print(json.dumps(json_summary))
             self.logger.debug(json_summary)

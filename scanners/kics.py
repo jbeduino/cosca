@@ -12,7 +12,7 @@ class CustomScanner(Scanner):
     CONTAINER_TARGET_DIRECTORY = "/src"
     CONTAINER_REPORT_DIRECTORY = "/tmp"
 
-    def scan(self, target, working_dir, outputs):
+    def scan(self, target, working_dir, outputs, network):
         self.logger.info("Starting to scan target: %s", target)
         command=f"scan -p {self.CONTAINER_TARGET_DIRECTORY} \
             --output-path {self.CONTAINER_REPORT_DIRECTORY} \

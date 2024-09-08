@@ -15,7 +15,7 @@ class CustomScanner(Scanner):
     CONTAINER_REPORT_DIRECTORY = "/tmp"
     CONTAINER_REPORT_FILE = f"{CONTAINER_REPORT_DIRECTORY}/{REPORT_FILE_NAME_XML}"
 
-    def scan(self, target, working_dir, outputs):
+    def scan(self, target, working_dir, outputs, network):
         self.logger.info("Starting to scan target: %s", target)
         command = ""
         volumes = {working_dir: {

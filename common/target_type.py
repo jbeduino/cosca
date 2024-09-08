@@ -17,6 +17,18 @@ class TargetType(Enum):
     DOCKER = 'docker'
 
     @staticmethod
+    def is_soap_endpoint(url):
+        try:
+            wsdl_url = f"{url}?wsdl" if  not url.endswith("?wsdl") else url
+            response = requests.get(wsdl_url)
+            if response.status_code == 200 and 'definitions' in response.text:
+                return True
+            return False
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+            return False
+
+    @staticmethod
     def get_target_type(target):
         if validators.url(target):
             if urlparse(target).netloc=="github.com":
@@ -27,8 +39,10 @@ class TargetType(Enum):
                     content = response.text
                     if '"openapi"' in content or '"swagger"' in content:
                         return TargetType.OPENAPI
-                    elif '<soapenv:Envelope' in content or 'xmlns:soapenv' in content:
+                    elif TargetType.is_soap_endpoint(target):
                         return TargetType.SOAP
+                    # elif '<soapenv:Envelope' in content or 'xmlns:soapenv' in content:
+                    #     return TargetType.SOAP
                     else:
                         introspection_query = {"query": "{ __schema { types { name } } }"}
                         introspection_response = requests.post(target, json=introspection_query)

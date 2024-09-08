@@ -14,7 +14,7 @@ class CustomScanner(Scanner):
     DOCKER_IMAGE = "trufflesecurity/trufflehog:latest"
     DEFECTDOJO_IMPORT_FORMAT = "Trufflehog Scan"
 
-    def scan(self, target, working_dir, outputs):
+    def scan(self, target, working_dir, outputs, network):
         target_id=super().get_target_id(target)
         self.logger.info("Starting to scan target: %s (ID: %s)", target, target_id)
         report_filename=f"{datetime.now().strftime('%y%m%d%H%M%S')}_{self.NAME}_{target_id}.json"

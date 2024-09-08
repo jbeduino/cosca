@@ -26,6 +26,7 @@ class TestTargetType(unittest.TestCase):
         mock_get.return_value = Mock(status_code=200, text='"openapi"')
         self.assertEqual(TargetType.OPENAPI, TargetType.get_target_type('https://petstore.swagger.io'))
 
+    #TODO review
     @patch('validators.url')
     @patch('requests.get')
     def test_soap(self, mock_get, mock_url):
