@@ -17,8 +17,8 @@ python3 cosca.py -t https://ginandjuice.shop bkimminich/juice-shop:latest https:
 
 Cosca takes advantage of appsec scanners that offer their official docker version. It identifies each type of target and invokes the appropiate scanner.
 Possible target types include: website, API, directory, github repository, container. 
-A combination of scanners and types of targets for a particular purpose are called combos and are defined in the file combos.json that can be customized.
-Implemented scanners: 
+A combination of scanners and types of targets for a particular purpose are called combos and are defined in the file combos.json that can be customized. 
+Implemented scanners so far: 
 - Kics (IaC)
 - CycloneDX (SBOM generation and scanning)
 - Syft + Grype (SBOM generation and scanning)
@@ -52,6 +52,7 @@ Implemented scanners:
 - Have a brief understanding of the security debt of an outdated project. 
 - Scan all the assets involved in a deployment during the CI/CD and attach the report or even block the pipeline if the expected criteria is not met.
 - Check 3rd party code to show up the evident associated risks.
+- Common Vulnerability Management duties. Scan, share results, rescan, compare, inform.
 
 
 
