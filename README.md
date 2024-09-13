@@ -56,8 +56,8 @@ Implemented scanners so far:
 
 
 
-## Features
+## FAQS
 
-- 
+- Why inluded 2 different SBOM scanners (Grype and CdxGen)
 - Feature 2
 - Feature 3
