@@ -12,7 +12,6 @@
 python3 cosca.py -t https://ginandjuice.shop bkimminich/juice-shop:latest https://github.com/juice-shop/juice-shop -o pdf zip defectdojo
 ```
 
-
 # Introduction
 
 Cosca takes advantage of appsec scanners that offer their official docker version. It identifies each type of target and invokes the appropiate scanner.
