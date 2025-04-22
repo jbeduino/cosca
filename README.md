@@ -18,7 +18,7 @@ python3 cosca.py \
   -o pdf zip
 ```
 
-![Demo](https://github.com/jbeduino/cosca/releases/download/untagged-9733af0a0ebbc760195e/demo.gif)
+![Demo](https://github.com/jbeduino/cosca/releases/download/asset_0.1/demo.gif)
 [Edited for brevity — no output or logic was altered.]
 
 # Introduction
