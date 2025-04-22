@@ -19,7 +19,7 @@ python3 cosca.py \
 ```
 
 ![Demo](https://github.com/jbeduino/cosca/releases/download/untagged-9733af0a0ebbc760195e/demo.gif)
-
+[Edited for brevity — no output or logic was altered.]
 
 # Introduction
 
