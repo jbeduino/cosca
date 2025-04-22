@@ -1,6 +1,6 @@
 
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/2598e2c1-5f41-4f8e-8dd5-c9b3057ddb5b" width="250" alt="Cosca logo">
+    <img src="https://github.com/user-attachments/assets/98a77ea1-7904-4e2b-a362-f87b920ef82c" width="250" alt="Cosca logo">
 </p>
 
 # Cosca
@@ -8,9 +8,14 @@
 Cosca (Combo Scanner) is an Application Security automation tool that invokes third-party scanners and processes outputs in a one-liner command.
 
 # TL;DR
-```console
-# Scan a web site, Docker image and Github repo. Write the summary in a PDF and zip the reports, all in one shot:
-python3 cosca.py -t https://ginandjuice.shop bkimminich/juice-shop:latest https://github.com/juice-shop/juice-shop -o pdf zip
+```text
+# Scan website, Docker image and repo. Write the summary in a PDF and zip the reports, all in one shot:
+
+python3 cosca.py \
+  -t https://ginandjuice.shop \
+     bkimminich/juice-shop:latest \
+     https://github.com/juice-shop/juice-shop \
+  -o pdf zip
 ```
 
 ![Demo](https://github.com/jbeduino/cosca/releases/download/untagged-9733af0a0ebbc760195e/demo.gif)
@@ -85,7 +90,7 @@ pip install -r requirements.txt
 
 ## Clone a vulnerable project to scan
 ```console
-git clone https://github.com/juice-shop/juice-shop.git /tmp/juice-shop
+git clone https://github.com/juice-shop/juice-shop.git /tmp/juice-shop-master
 ```
 
 ## Setup DefectDojo
@@ -105,9 +110,9 @@ Don't scan sensitive data in your tests with DefectDojo demo site.
 
 ## Scan Gin & Juice 
 
-```console
+```text
 # Scan local directory with source code, the deployed web application and a related Docker image.
-python3 cosca.py -t /tmp/juice-shop https://ginandjuice.shop bkimminich/juice-shop:latest -o pdf zip defectdojo
+python3 cosca.py -t /tmp/juice-shop-master https://ginandjuice.shop bkimminich/juice-shop:latest -o pdf zip defectdojo
 
 ```
 
@@ -127,14 +132,14 @@ Scans a local directory containing source code, a website, and a Docker image. I
    
 # FAQs
 
-- Can I add another scanner? 
-Yes, inherit your class from Scanner (scanner.py), and place your scanner file in the scanners directory. 
+- Can I add another scanner?  
+Yes, inherit your class from Scanner (scanner.py), and place your scanner implementation in the scanners/ folder. 
 
 - Can I add another output handler?  
-Yes, inherit your class from OutputHandler (output_handler.py), and place your output handler file in the output_handlers directory. 
+Yes, inherit your class from OutputHandler (output_handler.py), and place your output handler implementation in the output_handlers/ folder. 
 
 - Can I define a custom combination of scanners?  
-Yes, add an entry to combos.json and invoke it using  --combo.
+Yes, add an entry to combos.json and run Cosca with `--combo <your-combo-name>`.
 
 - Why included 2 different SBOM scanners (Syft and CdxGen)?  
 CdxGen generates CycloneDX, the de facto standard for SBOMs. In contrast, Syft offers a lightweight but more limited alternative, which, for example, does not support pyproject.toml.

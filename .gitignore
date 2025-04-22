@@ -1,13 +1,6 @@
-*.pyc
 .vscode
 venv/
-demo_venv/
 .pytest_cache
-__pycache__/
-TODO
-venv/bin/activate.csh
-venv/bin/activate
-venv/bin/activate.fish
-venv/bin/activate
 *.pyc
 __pycache__/
+TODO
