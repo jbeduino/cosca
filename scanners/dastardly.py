@@ -3,7 +3,7 @@ from pathlib import Path
 import json
 from scanner import Scanner
 from common.converter import JUnit2Sarif
-
+from common.target_type import TargetType
 
 class CustomScanner(Scanner):
     """ Dastardly (https://portswigger.net/burp/dastardly) for Combo Scanner """
@@ -14,6 +14,8 @@ class CustomScanner(Scanner):
     CONTAINER_TARGET_DIRECTORY = "/src"
     CONTAINER_REPORT_DIRECTORY = "/tmp"
     CONTAINER_REPORT_FILE = f"{CONTAINER_REPORT_DIRECTORY}/{REPORT_FILE_NAME_XML}"
+    ACCEPTED_TARGET_TYPES = [TargetType.WEB]
+    
 
     def scan(self, target, working_dir, outputs, network):
         self.logger.info("Starting to scan target: %s", target)

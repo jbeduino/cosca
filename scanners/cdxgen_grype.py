@@ -2,7 +2,7 @@ import os
 import sys
 import json
 from scanner import Scanner
-
+from common.target_type import TargetType
 
 class CustomScanner(Scanner):
     """
@@ -19,6 +19,7 @@ class CustomScanner(Scanner):
     CONTAINER_TARGET_DIRECTORY = "/src"
     CONTAINER_REPORT_DIRECTORY = "/tmp"
     CONTAINER_REPORT_FILE = f"{CONTAINER_REPORT_DIRECTORY}/{REPORT_FILE_NAME}"
+    ACCEPTED_TARGET_TYPES = [TargetType.DIRECTORY]
 
     def scan(self, target, working_dir, outputs, network):
         self.logger.info("Generating SBOM...")

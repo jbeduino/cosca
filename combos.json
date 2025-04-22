@@ -1,39 +1,6 @@
 {
     "combos": [
       {
-        "name": "custom1",
-        "mappings": [
-          {
-            "type": "directory",
-            "scanners": ["cdxgen_grype"]
-          },
-          {
-            "type": "github",
-            "scanners": ["trufflehog"]
-          },
-          {
-            "type": "web",
-            "scanners": ["zap"]
-          },
-          {
-            "type": "openapi",
-            "scanners": ["zap"]
-          },
-          {
-            "type": "graphql",
-            "scanners": ["zap"]
-          },
-          {
-            "type": "soap",
-            "scanners": ["zap"]
-          },
-          {
-            "type": "docker",
-            "scanners": ["trivy"]
-          }
-        ]
-      },
-      {
         "name": "default",
         "mappings": [
           {
@@ -72,6 +39,10 @@
           {
             "type": "directory",
             "scanners": ["semgrep","kics","syft_grype","trufflehog"]
+          },
+          {
+            "type": "docker",
+            "scanners": ["trivy"]
           }
         ]
       },

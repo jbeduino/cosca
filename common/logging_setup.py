@@ -1,8 +1,7 @@
 import logging
 import colorlog
 
-def setup_logger(name, indent=0, level=logging.INFO):
-    prefix="🔹"*indent
+def setup_logger(name, prefix='', level=logging.INFO):
     logger = logging.getLogger(name)
     logger.setLevel(level)
     handler = logging.StreamHandler()

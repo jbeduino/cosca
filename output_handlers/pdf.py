@@ -48,6 +48,16 @@ class CustomOutputHandler(OutputHandler):
             textColor='#333333'
         )
 
+        note_style = ParagraphStyle(
+            'Modern',
+            parent=styles['Normal'],
+            fontName='Helvetica',
+            fontSize=8,
+            leading=12,
+            spaceAfter=12,
+            textColor='#333333'
+        )
+
         title_style_1 = ParagraphStyle(
             'Title',
             parent=styles['Title'],
@@ -71,13 +81,10 @@ class CustomOutputHandler(OutputHandler):
         title = Paragraph(json_data["title"], title_style_1)
         elements.append(title)
         elements.append(Spacer(1, 0.2*inch))
-        elements.append(ModernSeparator(width=6*inch, height=2))
-        elements.append(Spacer(1, 0.2*inch))
-        paragraph1 = Paragraph(json_data["date"], modern_style)
-        paragraph2 = Paragraph(json_data["time"], modern_style)
-        elements.append(paragraph1)
+        paragraph2 = Paragraph(f'{json_data["date"]} - {json_data["time"]}', modern_style)
         elements.append(paragraph2)
-        elements.append(ModernSeparator(width=6*inch, height=2))
+
+        elements.append(ModernSeparator(width=6*inch, height=1))
         elements.append(Spacer(1, 12))
         title_summary = Paragraph("Findings summary", title_style_2)
         elements.append(Spacer(1, 0.2*inch))
@@ -96,13 +103,17 @@ class CustomOutputHandler(OutputHandler):
         ])
         table.setStyle(table_style)
         elements.append(table)
+
+        elements.append(Spacer(1, 0.2*inch))
+        paragraph_end = Paragraph('For more information, visit https://github.com/jbeduino/cosca', note_style)
+        elements.append(paragraph_end)
         pdf.build(elements)
 
     def create_json_file(self, filename):
         data = {
             "title": "Combo Scanner Report",
-            "date": datetime.now().strftime('Date: %Y-%m-%d'),
-            "time": datetime.now().strftime('Time: %H:%M:%S'),
+            "date": datetime.now().strftime('%Y-%m-%d'),
+            "time": datetime.now().strftime('%H:%M:%S'),
             "table": [['Target','Scanner', 'Info', 'Low', 'Medium', 'High', 'Critical', 'Unknown']]
         }
         with open(filename, 'w', encoding='utf-8') as json_file:
@@ -143,7 +154,7 @@ class CustomOutputHandler(OutputHandler):
         pdf_path = f"{self.args.pdf_output_folder}{os.sep}{pdf_name}"
         self.add_row_to_json(json_path, [target,scanner]+aux_args["json_findings"])
         self.write_pdf(pdf_path,json_path)
-        self.logger.info("PDF report: %s", pdf_path)
+        self.logger.info("PDF report: file://%s", pdf_path)
         return {self.name : [{"pdf_summary": pdf_path},{"json_summary": json_path}]}
 
     def process_stdout(self, stdout):

@@ -15,7 +15,7 @@ class OutputHandler(ABC):
     def __init__(self, name, parser,log_level=logging.INFO):
         self.name = name
         self.parser = parser
-        self.logger = setup_logger(name,3,level=log_level)
+        self.logger = setup_logger(name,'📝',level=log_level)
         self.logger.debug("Output Handler initialized.")
         self.setup()
 

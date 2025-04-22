@@ -6,13 +6,15 @@ import sys
 import json
 import validators
 from scanner import Scanner
-
+from common.target_type import TargetType
 
 class CustomScanner(Scanner):
     """ Trufflehog (https://github.com/trufflesecurity/trufflehog) for Combo Scanner """
     NAME = "trufflehog"
     DOCKER_IMAGE = "trufflesecurity/trufflehog:latest"
     DEFECTDOJO_IMPORT_FORMAT = "Trufflehog Scan"
+    ACCEPTED_TARGET_TYPES = [TargetType.DIRECTORY, TargetType.GITHUB]
+    
 
     def scan(self, target, working_dir, outputs, network):
         target_id=super().get_target_id(target)

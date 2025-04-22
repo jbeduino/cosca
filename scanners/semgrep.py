@@ -3,7 +3,7 @@ import sys
 import json
 from datetime import datetime
 from scanner import Scanner
-
+from common.target_type import TargetType
 
 class CustomScanner(Scanner):
     """ Semgrep (https://github.com/semgrep/semgrep) for Combo Scanner """
@@ -12,6 +12,7 @@ class CustomScanner(Scanner):
     DEFECTDOJO_IMPORT_FORMAT = "Semgrep JSON Report"
     CONTAINER_TARGET_DIRECTORY = "/src"
     CONTAINER_REPORT_DIRECTORY = "/tmp"
+    ACCEPTED_TARGET_TYPES = [TargetType.DIRECTORY]
     
     # def __init__(self):
     #     super().__init__(self.NAME, self.DOCKER_IMAGE)
@@ -27,7 +28,7 @@ class CustomScanner(Scanner):
                                                   'mode': 'rw'}}
         command=f"semgrep --config auto --text --json-output={container_report_path} \
                 {self.CONTAINER_TARGET_DIRECTORY}"
-        logs=self.run_container(self.DOCKER_IMAGE, command, volumes)
+        logs=self.run_container(self.DOCKER_IMAGE, command, volumes, user="semgrep")
         host_report_path = f"{working_dir}/{report_filename}"
         self.report_path = host_report_path
         self.logger.debug("Custom scan completed.")

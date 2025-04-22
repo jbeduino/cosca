@@ -4,6 +4,7 @@ from datetime import datetime
 import docker
 from scanner import Scanner
 import json
+from common.target_type import TargetType
 
 class CustomScanner(Scanner):
     """ 
@@ -11,12 +12,12 @@ class CustomScanner(Scanner):
     """
     NAME = "trivy"
     DOCKER_IMAGE = "aquasec/trivy"
-    DEFECTDOJO_IMPORT_FORMAT = "Trivy"
+    DEFECTDOJO_IMPORT_FORMAT = "Trivy Scan"
     SEVERITY_INDEX={"INFO":1,"LOW":1,"MEDIUM":2,"HIGH":3,"CRITICAL":4,"UNKNOWN":5}
     REPORT_FILENAME = f"scan_results_{NAME}_{datetime.now().strftime('%y%m%d%H%M%S')}.json"
     CONTAINER_REPORT_DIRECTORY = "/tmp"
     CONTAINER_REPORT_PATH = f"{CONTAINER_REPORT_DIRECTORY}/{REPORT_FILENAME}"
-
+    ACCEPTED_TARGET_TYPES = [TargetType.DOCKER]
 
     def scan(self, target, working_dir, outputs, network):
         target_id=super().get_target_id(target)

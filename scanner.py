@@ -13,7 +13,7 @@ class Scanner(ABC):
 
     def __init__(self, target_type, log_level=logging.INFO):
         self.report_path = ""
-        self.logger = setup_logger(self.NAME, 2, level=log_level)
+        self.logger = setup_logger(self.NAME, '🔍', level=log_level)
         self.target_type=target_type
         if target_type not in self.ACCEPTED_TARGET_TYPES:
             self.logger.error("Scanner %s doesn't accept target type %s", self.NAME, target_type)
@@ -77,7 +77,7 @@ class Scanner(ABC):
             network=network,
             detach=True,
             stdout=True,
-            stderr=True
+            stderr=False
         )
         container.wait()
         logs = container.logs().decode("utf-8")

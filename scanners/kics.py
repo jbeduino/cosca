@@ -1,6 +1,7 @@
 from datetime import datetime
 import json
 from scanner import Scanner
+from common.target_type import TargetType
 
 
 class CustomScanner(Scanner):
@@ -11,6 +12,7 @@ class CustomScanner(Scanner):
     REPORT_FILENAME = f"scan_results_{NAME}_{datetime.now().strftime('%y%m%d%H%M%S')}.json"
     CONTAINER_TARGET_DIRECTORY = "/src"
     CONTAINER_REPORT_DIRECTORY = "/tmp"
+    ACCEPTED_TARGET_TYPES = [TargetType.DIRECTORY]
 
     def scan(self, target, working_dir, outputs, network):
         self.logger.info("Starting to scan target: %s", target)

@@ -27,6 +27,7 @@ class CustomOutputHandler(OutputHandler):
                     if arcname not in zipf.namelist():
                         zipf.write(file_path, arcname)
 
+
     def remove_prefix_from_path(self, file_path, prefix):
         if file_path.startswith(prefix):
             return file_path[len(prefix):].lstrip(os.sep)
@@ -42,7 +43,7 @@ class CustomOutputHandler(OutputHandler):
         zip_path = f"{self.args.zip_output_folder}{os.sep}{zip_name}"
         self.add_files_to_zip(os.path.dirname(report_path), zip_path)
         
-        self.logger.info("File %s added to zip file: %s",
+        self.logger.info("File %s added to zip file: file://%s",
                          os.path.basename(report_path), zip_path)
         return {self.name : [{"zip_file": zip_path}]}
 
