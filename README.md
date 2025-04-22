@@ -108,11 +108,15 @@ You can also add more preferences: DEFECTDOJO_ENGAGEMENT_ID, DEFECTDOJO_PRODUCT_
 Don't scan sensitive data in your tests with DefectDojo demo site.
 
 
-## Scan Gin & Juice 
+## Scan Gin & Juice and push to DefectDojo
 
 ```text
 # Scan local directory with source code, the deployed web application and a related Docker image.
-python3 cosca.py -t /tmp/juice-shop-master https://ginandjuice.shop bkimminich/juice-shop:latest -o pdf zip defectdojo
+python3 cosca.py
+  -t /tmp/juice-shop-master 
+     https://ginandjuice.shop 
+     bkimminich/juice-shop:latest 
+  -o pdf zip defectdojo
 
 ```
 
