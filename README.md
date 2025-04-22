@@ -28,7 +28,7 @@ Possible target types included from scratch: directory, website, API, Github rep
 A combination of scanners and types of targets for a particular purpose are called combos and are defined in the file combos.json that can be customized. 
 Implemented scanners so far: 
 - Kics (IaC)
-- CycloneDX (SBOM generation and scanning)
+- CycloneDX + Grype (SBOM generation and scanning)
 - Syft + Grype (SBOM generation and scanning)
 - Semgrep (SAST)
 - ZAP (API, website)
@@ -145,5 +145,5 @@ Yes, inherit your class from OutputHandler (output_handler.py), and place your o
 - Can I define a custom combination of scanners?  
 Yes, add an entry to combos.json and run Cosca with `--combo <your-combo-name>`.
 
-- Why included 2 different SBOM scanners (Syft and CdxGen)?  
+- Why included 2 different SBOM generators (Syft and CdxGen)?  
 CdxGen generates CycloneDX, the de facto standard for SBOMs. In contrast, Syft offers a lightweight but more limited alternative, which, for example, does not support pyproject.toml.
