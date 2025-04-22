@@ -5,11 +5,11 @@
 
 # Cosca
 
-Cosca (Combo Scanner) is an Application Security automation tool that invokes third-party scanners and processes outputs in a one-liner command.
+Cosca (Combo Scanner) is an Application Security automation tool that invokes third-party scanners and processes their outputs — all with a single command.
 
 # TL;DR
 ```text
-# Scan website, Docker image and repo. Write the summary in a PDF and zip the reports, all in one shot:
+# Scan website, Docker image and repo. Write the summary in a PDF and zip the reports
 
 python3 cosca.py \
   -t https://ginandjuice.shop \
